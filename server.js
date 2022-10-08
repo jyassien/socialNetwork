@@ -8,7 +8,7 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 // const connectDB = require("./config/database");
-// const mainRoutes = require("./routes/main");
+const mainRoutes = require("./routes/main");
 // const postRoutes = require("./routes/posts");
 
 const app = express();
@@ -35,7 +35,7 @@ app.use(logger("dev"));
 //Use forms for put / delete
 app.use(methodOverride("_method"));
 
-// Setup Sessions - stored in MongoDB
+// Setup Sessions - stored in MongoDB. Login status will be kept even if the browser is closed.
 app.use(
   session({
     secret: "keyboard cat",
@@ -57,6 +57,6 @@ app.use(flash());
 // app.use("/post", postRoutes);
 
 //Server Running
-app.listen(process.env.PORT || 4041, () => {
-  console.log("Server is running on port", process.env.PORT || 4041);
+app.listen(process.env.PORT || 3041, () => {
+  console.log("Server is running on port", process.env.PORT || 3041);
 });
