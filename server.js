@@ -14,7 +14,7 @@ const mainRoutes = require("./routes/main");
 const app = express();
 
 // Passport config
-// require("./config/passport")(passport);
+require("./config/passport")(passport);
 
 //Connect To Database
 connectDB();
@@ -36,21 +36,21 @@ app.use(express.json());
 // app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB. Login status will be kept even if the browser is closed.
-// app.use(
-//   session({
-//     secret: "keyboard cat",
-//     resave: false,
-//     saveUninitialized: false,
-//     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-//   })
-// );
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
 
 // Passport middleware
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
-// app.use(flash());
+app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.get("/try", (req, res) => {
